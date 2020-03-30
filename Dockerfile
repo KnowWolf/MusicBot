@@ -29,7 +29,7 @@ RUN pip3 install --upgrade pip \
  && pip3 install --no-cache-dir -r requirements.txt \
 \
 # Clean up build dependencies
- && apk del .build-deps
+ && apk del .build-deps \
  && adduser -D -h /home/container container
 # Add project sources
 COPY . ./
