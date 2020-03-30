@@ -19,7 +19,7 @@ RUN apk update \
   python3-dev 
 
 # Set working directory
-WORKDIR /usr/src/musicbot
+WORKDIR /home/container
 
 # Add project requirements
 COPY ./requirements.txt ./requirements.txt
@@ -30,13 +30,13 @@ RUN pip3 install --upgrade pip \
 \
 # Clean up build dependencies
  && apk del .build-deps
-
+ && adduser -D -h /home/container container
 # Add project sources
 COPY . ./
 
 # Create volume for mapping the config
 VOLUME /usr/src/musicbot/config
 
-ENV APP_ENV=docker
+ENV USER=container HOME=/home/container
 
 CMD ["python3", "dockerentry.py"]
